@@ -61,7 +61,7 @@ ci sono alcune varianti di questo metodo qui ne riporto una.
 
 #+ATTR_ORG: :width 300
 #+ATTR_latex: :width 300
-
+#+ATTR_HTML: width="100px"
 [[./IMG/VisioneImg/HSL-HSV.png]] [[./IMG/VisioneImg/HCV.png]]
 
 Nota: nell'immagine del cono c'è scritto saturation ma in quella del professore c'era scritto Chroma, il risultato è lo stesso ma è giusto precisarlo  
