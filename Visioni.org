@@ -1,0 +1,80 @@
+
+* Occhio umano
+La retina la parte più interna dell'occhio è fotosensibile grazie alla presenza di due tipologie di fotorecettori, i "coni" e i "bastoncelli"
+
+- I coni con una forma conca permettono in presenza di luce di percepire i colori e ne esistono tre specifici per il rosso il verde e il blu.
+- i bastoncelli sono attivi quando la luce è estremamente debole e consentono una visione in bianco e nero
+
+la fovea è una parte della retina in cui è presente la maggior parte dei coni e anche il punto dove viene messa a fuoco l'immagine.
+la cornea permette il passaggio della luce e l'iride un muscolo circolare pigmentato che permette di regolare quanta luce entra all'interno dell'occhio, il cristallino è una lente naturale che permette di mettere a fuoco l'immagine tramite un processo chiamato accomodazione
+e  cambia la sua angolatura a seconda della distanza dell'oggetto che vogliamo mettere a fuoco. tutte le informazioni recepite dalla retina vengono inviate al cervello tramite il nervo ottico, ne punto in qui nasce il nervo ottico non vi sono fotorecettori e viene chiamato punto cieco la presenza dei due occhi permette di colmare il punto ceco e di percepire la profondità
+
+Note: Le donne hanno una particolare sensibilità nel cono che percepisce il rosso e per questo riescono a distinguere più sfumature degli uomini 
+
+Nota: noi umani abbiamo una visione foveata
+Nota: movimenti saccarici che mettono a fuoco l'immaggine a intorno al centro 
+* TODO Teorema di shannon (campionamento)
+* CCD (Charge-Coupled Device)
+Il CCD è una particolare circuito integrato che permette di acquisire immagini e viene implementato in telecamere e cellulari di costo medio, esistono altre tecnologie più efficienti ma meno economiche come il CMOS ma cono caratteristiche leggermente diverse.
+Il CCD contiene sensori di luminosità ad ogni sensore corrisponde un pixel dell'immagine risultante di conseguenza maggiore è il numero di sensori maggiore è la risoluzione dell'immagine.
+chiaramente l'immagine risultante sarà ***In scala di grigio**** (Comunemente chiamato bianco e nero) in quanto la variazione della luminosità da nero a bianco crea sfumature di grigio.
+Per ottenere un immagine a colori va inserito uno specifico filtro davanti al sensore chiamato filtro di Bayer.
+
+** TODO Filtro di Bayer
+[[./IMG/VisioneImg/FiltroDiBayer.jpeg]]
+
+Il filtro contiene il R:25% G:50% B:25% in qunto l'occhio dell'essere umano è più sensibile al verde rispetto al blu e al rosso. il colore effettivo dell'immagine si ricostruisce tramite un processo chiamato ***Demosaicizzazione*** o interpolazione che fa una media tra i colori nell'introno del pixel che vogliamo colorare, l'intorno piò essere di due tipi:
+
+- 4-connettivita' (intorno forte)
+- 8-connettivita' (intorno debole)
+
+In conclusione esistono vari tipi di filtri ma tutti con un pattern simile e che portano ad risultato quasi identico, non c'è un migliore o un peggiore semplicemente è un discorso di resa finale della foto che cambia leggermente in base al filtro applicato.
+* Schermi a tubo catodico
+[[./IMG/VisioneImg/TVTuboCatodico.jpg]]
+
+Le vecchie tv a tubo catodico funzionavano tramite un raggio che veniva sparato ad alta velocità su una superficie di fosfòro (da non confondere con il fòsforo), la superficie veniva eccitata e si accendeva, maggiore era il quantitativo di fosforo più l'immagine persisteva eccitata.
+il raggio sparato grazie alla differenza di potenziale tra il catodo e l'anodo veniva indirizzato grazie a delle bobine che permettevano quindi di indirizzare il raggio sequenzialmente dall'angolo in altro a desta a quelli in basso a sinistra, in questo modo si potevano creare immagini di scala di grigio semplicemente regolando la potenza del raggio di elettroni, 
+** Tipi di scansione
+ora che abbiamo visto come si potevano rappresentare delle immagini sulla superficie dello schermi possiamo parlare delle varie tecniche con cui si poteva sfruttare la poca banda per aumentare la qualità dell'immagine.
+*** Scansione progressiva
+La scansione progressiva consisteva nello scansionare riga per riga tutto lo schermo dall'alto in basso eccitando il fosforo, chiaramente arrivati all'ultima riga la prima riga era già quasi spenta,l'immagine veniva aggiornata 30 volte al secondo (30 FPS)
+*** Scansione interlacciata
+La scansione interlacciata invece eccitava a righe alterne, la prima scansione con le righe pari e la seconda con le righe dispari, il punto di questa tecnica era che permetteva di ridurre della metà la larghezza di banda necessaria per creare un immagine completa giocando sul fatto quando si scansiona una riga inevitabilmente quelle adiacenti si eccitano leggermente il che a lungo andare crea un'immagine buona con la metà delle scansioni in quanto l'occhio umano viene ingannato dalla velocità con cui le linee si alternano (la luce resta impressa nell'occhio come quando guardiamo una lampadina e poi distogliamo lo sguardo, per qualche millisecondo resta l'immagine impressa nell'occhio ).
+
+** Note
+- Quando leggiamo 1080p o 720p la p sta per progressivo se fosse un video interlacciato sarebbe 1080i
+
+* Modelli di colore
+esistono diversi modelli di colore che permettono la rappresentazione dei colori con diverse combinazioni il più conosciuto è l'RGB, che con il Rosso, Verde, Blue ci permette di ricreare tutti i colori possibili ma ci sono anche altri modelli.
+** Mescolanza additiva
+La mescolazione vine detta additiva quando il nero è rappresentato dall'assenza di colore
+*** RGB
+Forse uno dei modelli di colore più conosciuto, utilizzato anche in molti linguaggi di programmazione per rappresentare i coloro, si compone di 3 valori, [R,G,B] che rappresentano le percentuale di rosso, verde e blue che andranno a creare il colore, possono assumere 256 valori da 0 a 255 in particolare [0,0,0] è il nero e [255,255,255] è il bianco.
+[[./IMG/VisioneImg/RGBCube.png]]
+Questo cubo è una rappresentazione 3D del modello, chiaramente alle coordinate 255,255,255 avremo il bianco che non è visibile in questa immagine, in oltre dobbiamo ricordarci che quando i numeri sono uguali come ad esempio [75,75,75] stiamo considerando una gradazione di grigio
+
+Nota: Esiste anche il BGR non è altro che un diverso modo di sommare i colori veniva usato in contrapposizione a RGB in una disputa simile a quella per la posizione del bit più significativo (little-endian vs big-endian) (non sono sicuro se fosse una disputa sempre tra Intel e Motorola) 
+
+*** HSV
+Questo è un modello più orientato ad una comprensione umana infatti l'acronimo sta per Hue Saturation Intensity , se volessimo acquistare una maglietta colorata sarebbe più facile dire il colore la saturazione dello stesso e la sua intensità (esempio del prof.).
+ci sono alcune varianti di questo metodo qui ne riporto una.
+
+#+ATTR_ORG: :width 300
+#+ATTR_latex: :width 300
+
+[[./IMG/VisioneImg/HSL-HSV.png]] [[./IMG/VisioneImg/HCV.png]]
+
+Nota: nell'immagine del cono c'è scritto saturation ma in quella del professore c'era scritto Chroma, il risultato è lo stesso ma è giusto precisarlo  
+** Mescolanza sottrattiva
+La mescolazione si di ce sottrattiva quando il bianco è rappresentato dall'assenza di colore
+*** CMY
+CMY è l'acronimo di ciano, magenta e giallo questo modello rappresenta il nero come la somma degli altri 3 colori, viene utilizzato quando si deve stampare o scrivere su una superficie bianca in quanto l'assenza di colore è il bianco. vine utilizzato nelle stampanti. Aneddoto del prof: in realtà però nelle stampanti il nero non è facilmente ricostruibile sul momento (in quanto vine fuori una sorta di grigio scuro) quindi si aggiunge il nero come cartuccia di colore assestante
+#+ATTR_ORG: :width 300
+#+ATTR_latex: :width 300
+[[./IMG/VisioneImg/CMY.png]]
+** TODO Attenzione
+[[./IMG/VisioneImg/RGB_channels_separation.png]]
+
+Dobbiamo sempre ricordare che se suddividiamo R,G e B in realtà siamo ottenendo tre immagini a scala di grigio, immaginiamo di scattare la stessa foto in scala di grigi ma mettendo davanti all'obbiettivo un foglio trasparente prima rosso poi verde e poi blue, le foto risultanti saranno i scala di grigio ma saranno più chiare nei punti in cui il colore della lastra posizionata sull'obbiettivo è più presente.   
+
+* Convoluzioni
