@@ -29,6 +29,8 @@ Il filtro contiene il R:25% G:50% B:25% in qunto l'occhio dell'essere umano è p
 - 8-connettivita' (intorno debole)
 
 In conclusione esistono vari tipi di filtri ma tutti con un pattern simile e che portano ad risultato quasi identico, non c'è un migliore o un peggiore semplicemente è un discorso di resa finale della foto che cambia leggermente in base al filtro applicato.
+** Altri tipi di "CCD"
+Il Foveon X3 non utilizza un filtro di Bayer in quanto i sensori sono 3 impilati l'uno sull'altro, ogni sensore permette il passaggio della luce al so sotto di se, ad ogni livello vi è un filtro di colore diverso in ordine blue, verde e rosso. In questo modo si possono catturare direttamente immagini RGB senza dover passare per l'approssimazione del filtro di Bayer
 * Schermi a tubo catodico
 [[./IMG/VisioneImg/TVTuboCatodico.jpg]]
 
@@ -46,16 +48,18 @@ La scansione interlacciata invece eccitava a righe alterne, la prima scansione c
 
 * Modelli di colore
 esistono diversi modelli di colore che permettono la rappresentazione dei colori con diverse combinazioni il più conosciuto è l'RGB, che con il Rosso, Verde, Blue ci permette di ricreare tutti i colori possibili ma ci sono anche altri modelli.
-** Mescolanza additiva
-La mescolazione vine detta additiva quando il nero è rappresentato dall'assenza di colore
-*** RGB
+** RGB
 Forse uno dei modelli di colore più conosciuto, utilizzato anche in molti linguaggi di programmazione per rappresentare i coloro, si compone di 3 valori, [R,G,B] che rappresentano le percentuale di rosso, verde e blue che andranno a creare il colore, possono assumere 256 valori da 0 a 255 in particolare [0,0,0] è il nero e [255,255,255] è il bianco.
+
+
 [[./IMG/VisioneImg/RGBCube.png]]
+
+
 Questo cubo è una rappresentazione 3D del modello, chiaramente alle coordinate 255,255,255 avremo il bianco che non è visibile in questa immagine, in oltre dobbiamo ricordarci che quando i numeri sono uguali come ad esempio [75,75,75] stiamo considerando una gradazione di grigio
 
 Nota: Esiste anche il BGR non è altro che un diverso modo di sommare i colori veniva usato in contrapposizione a RGB in una disputa simile a quella per la posizione del bit più significativo (little-endian vs big-endian) (non sono sicuro se fosse una disputa sempre tra Intel e Motorola) 
 
-*** HSV
+** HSV/HCV
 Questo è un modello più orientato ad una comprensione umana infatti l'acronimo sta per Hue Saturation Intensity , se volessimo acquistare una maglietta colorata sarebbe più facile dire il colore la saturazione dello stesso e la sua intensità (esempio del prof.).
 ci sono alcune varianti di questo metodo qui ne riporto una.
 
@@ -65,16 +69,18 @@ ci sono alcune varianti di questo metodo qui ne riporto una.
 [[./IMG/VisioneImg/HSL-HSV.png]] [[./IMG/VisioneImg/HCV.png]]
 
 Nota: nell'immagine del cono c'è scritto saturation ma in quella del professore c'era scritto Chroma, il risultato è lo stesso ma è giusto precisarlo  
-** Mescolanza sottrattiva
-La mescolazione si di ce sottrattiva quando il bianco è rappresentato dall'assenza di colore
-*** CMY
+** CMY
 CMY è l'acronimo di ciano, magenta e giallo questo modello rappresenta il nero come la somma degli altri 3 colori, viene utilizzato quando si deve stampare o scrivere su una superficie bianca in quanto l'assenza di colore è il bianco. vine utilizzato nelle stampanti. Aneddoto del prof: in realtà però nelle stampanti il nero non è facilmente ricostruibile sul momento (in quanto vine fuori una sorta di grigio scuro) quindi si aggiunge il nero come cartuccia di colore assestante
 #+ATTR_ORG: :width 300
 #+ATTR_latex: :width 300
 [[./IMG/VisioneImg/CMY.png]]
+** YUV
+La peculiarità dello Spazio dei colori TUV è la separazione della luminanza Y dalla crominanza U e V
+
+$\begin{bmatrix}Y \\U\\V\end{bmatrix}=\begin{bmatrix}.299 & .587 & .114\\-.147 & -.289 & .436 \\.615 & -.515 -.100\end{bmatrix}\begin{bmatrix}R\\G\\B\end{bmatrix}$
+
 ** TODO Attenzione
 [[./IMG/VisioneImg/RGB_channels_separation.png]]
 
-Dobbiamo sempre ricordare che se suddividiamo R,G e B in realtà siamo ottenendo tre immagini a scala di grigio, immaginiamo di scattare la stessa foto in scala di grigi ma mettendo davanti all'obbiettivo un foglio trasparente prima rosso poi verde e poi blue, le foto risultanti saranno i scala di grigio ma saranno più chiare nei punti in cui il colore della lastra posizionata sull'obbiettivo è più presente.   
+Dobbiamo sempre ricordare che se suddividiamo R,G e B in realtà siamo ottenendo tre immagini a scala di grigio, immaginiamo di scattare la stessa foto in scala di grigi ma mettendo davanti all'obbiettivo un foglio trasparente prima rosso poi verde e poi blue, le foto risultanti saranno i scala di grigio ma saranno più scure nei punti in cui il colore della lastra posizionata sull'obbiettivo è più presente.   
 
-* Convoluzioni
