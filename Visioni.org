@@ -82,5 +82,38 @@ $\begin{bmatrix}Y \\U\\V\end{bmatrix}=\begin{bmatrix}.299 & .587 & .114\\-.147 &
 ** TODO Attenzione
 [[./IMG/VisioneImg/RGB_channels_separation.png]]
 
-Dobbiamo sempre ricordare che se suddividiamo R,G e B in realtà siamo ottenendo tre immagini a scala di grigio, immaginiamo di scattare la stessa foto in scala di grigi ma mettendo davanti all'obbiettivo un foglio trasparente prima rosso poi verde e poi blue, le foto risultanti saranno i scala di grigio ma saranno più scure nei punti in cui il colore della lastra posizionata sull'obbiettivo è più presente.   
+Dobbiamo sempre ricordare che se suddividiamo R,G e B in realtà siamo ottenendo tre immagini a scala di grigio, immaginiamo di scattare la stessa foto in scala di grigi ma mettendo davanti all'obbiettivo un foglio trasparente prima rosso poi verde e poi blue, le foto risultanti saranno i scala di grigio ma saranno più scure nei punti in cui il colore della lastra posizionata sull'obbiettivo è più presente.    
+* Convoluzione
+La matrice di convolizone anche detta kernel ci permette di effettuare una serie di operazioni che cambiano a seconda dei dati all'interno del kernel. generalmente è una matrice dispari in quanto è importante poterne definire un centro ma dal punto di vista puramente teorico la matrice non ha una dimensione definita. La matrice si fa scorrere sull'immagine e si effettua un operazione moltiplicando ogni entri del kernel con il corrispettivo valore dell'immagine dopo di che si sommano tutti questi valori e si dispone il risultato in una matrice di output nella stessa posizione del  centro del kernel.
+#+ATTR_ORG: :width 300
+#+ATTR_latex: :width 300
+#+ATTR_HTML: width="100px"
+[[./IMG/VisioneImg/convoluzione.png]]
+
+** Problema del bordo
+Proviamo ad immagine un kernel 3x3, se lo disponiamo in alto a sinistra che è il punto di partenza, come nella foto, noteremo che una volta effettuati i calcoli il risultato va disposto in corrispondenza del centro ma a questo punto in output otterremo un'immagine più piccola dell'original il che chiaramente è sbagliato, infatti questo problema è irrisolvibile.
+Una soluzione "lazy" è quella di ingrandire l'immagine originale a seconda della dimensione del kernel aggiungendo un bordo nero, chiaramente l'immagine in output deve essere della stessa dimensione di input di conseguenza la ritagliamo. nel caso di filtri come il blur che effettuano una media la presenza di bordi neri crea degli errori ovviamente quindi nel tempo sono state trovate delle soluzioni migliori. le possibili soluzioni con esempio pratico si possono trovare nelle slide della lezione a partire da pagina 52  
+** Codice per la convoluzione
+Questo è il codice in matlab senza l'ottimizzazione proposta dal professore, una semplice applicazione del'algoritmo
+
+#+begin_src matlab
+function out=Test(img,ker)
+ker = ker(:)';
+out=ones(size(img),'single');
+out=padarray(out,[1 1],0,'both');
+img=padarray(img,[1 1],0,'both');
+h=size(img,1);
+lookup=[-h-1, -h, -h+1, -1, 0, 1, h-1, h, h+1];
+
+for i=find(img)
+    t=0;
+    for k=1:9
+        t=t+(img(lookup(k)+i)*ker(k));
+    end
+    out(i)=t; 
+end
+
+out=out(2:end-1,2:end-1);
+figure;imshow(out,[]);
+#+end_src
 
